@@ -19,6 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -36,20 +37,20 @@ PORT(FPrA, FPrB_A, FPrB_G, FSec: OUT BIT_VECTOR(1 TO 3);
 
 END Carrefour_source;
 
-ARCHITECTURE Architec OF Carrefour_source IS
+ARCHITECTURE architect OF Carrefour_source IS
 	SIGNAL cnt: INTEGER RANGE 0 TO 30;
-	SIGNAL state: INTEGER RANGE 0 TO 10;
+	SIGNAL state: INTEGER RANGE 1 TO 11;
 
 BEGIN
 p: PROCESS(clk, rst) BEGIN
-	IF rst = "1"
+	IF rst = '1'
 	THEN cnt <= 0;
 		state <= 1;
 		FPrA <= "010";
 		FPrB_A <= "010";
 		FPrB_G <= "010";
 		FSec <= "010";
-	ELSIF clk'event AND clk = "1"
+	ELSIF clk'event AND clk = '1'
 	THEN CASE state IS
 		WHEN 1 => IF cnt = 8
 			THEN state <= 3;
@@ -78,14 +79,14 @@ p: PROCESS(clk, rst) BEGIN
 			FSec <= "100";
 		WHEN 4 =>
 			IF cnt /= 30 THEN cnt <= cnt + 1;
-			ELSIF cnt = 30 AND Det_A = 1 THEN
+			ELSIF cnt = 30 AND Det_A = '1' THEN
 				state <= 5;
 				FPrA <= "010";
 				FPrB_A <= "001";
 				FPrB_G <= "100";
 				FSec <= "100";
 				cnt <= 0;
-			ELSIF cnt = 30 AND Det_B = 1 AND Det_A = 0 THEN
+			ELSIF cnt = 30 AND Det_B = '1' AND Det_A = '0' THEN
 				state <= 9;
 				FPrA <= "010";
 				FPrB_A <= "010";
@@ -100,13 +101,13 @@ p: PROCESS(clk, rst) BEGIN
 			FSec <= "100";
 		WHEN 6 =>
 			IF cnt /= 10 THEN cnt <= cnt +1;
-			ELSIF (cnt = 10 OR Det_A = 0) AND Det_B = 0 THEN cnt <= 0;
+			ELSIF (cnt = 10 OR Det_A = '0') AND Det_B = '0' THEN cnt <= 0;
 				state <= 7;
 				FPrA <= "100";
 				FPrB_A <= "001";
 				FPrB_G <= "010";
 				FSec <= "100";
-			ELSIF (cnt = 10 OR Det_A = 0) AND Det_B = 1 THEN cnt <= 0;
+			ELSIF (cnt = 10 OR Det_A = '0') AND Det_B = '1' THEN cnt <= 0;
 				state <= 8;
 				FPrA <= "100";
 				FPrB_A <= "010";
@@ -130,7 +131,7 @@ p: PROCESS(clk, rst) BEGIN
 			FSec <= "001";
 		WHEN 10 =>
 			IF cnt /= 10 THEN cnt <= cnt +1;
-			ELSIF cnt = 10 OR Det_B = 0 THEN state <= 11;
+			ELSIF cnt = 10 OR Det_B = '0' THEN state <= 11;
 				cnt <= 0;
 				FPrA <= "100";
 				FPrB_A <= "100";
@@ -142,11 +143,13 @@ p: PROCESS(clk, rst) BEGIN
 			FPrB_A <= "001";
 			FPrB_G <= "100";
 			FSec <= "100";
+		WHEN OTHERS => null;
+		END CASE;
 			
 	END IF;
 	
 	
 	
 END process;
-END Architect;
+END architect;
 
