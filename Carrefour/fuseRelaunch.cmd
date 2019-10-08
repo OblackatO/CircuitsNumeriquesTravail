@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source_isim_beh.exe" -prj "/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source_beh.prj" "work.Carrefour_source" 

@@ -8,10 +8,7 @@
 <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/estti379/VHDL/Carrefour/Carrefour_source.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">/home/estti379/VHDL/Carrefour/Carrefour_source.vhd</arg>&quot; Line <arg fmt="%d" index="2">146</arg>. <arg fmt="%s" index="3">Syntax error near &quot;IF&quot;.</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source.vhd&quot; into library work</arg>
 </msg>
 
 </messages>

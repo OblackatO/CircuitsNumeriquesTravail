@@ -1,0 +1,53 @@
+ISim log file
+Running: /home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb /home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source_isim_beh.wdb 
+ISim P.20131013 (signature 0xfbc00daa)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+# pwd
+# pwd
+# cd ~/
+# pwd
+# cd /home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour
+
+# cd /home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour
+
+# cd /home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour
+# pwd
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# restart
+# source commands_etat3.tcl
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# cls
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# restart
+# source commands_etat3.tcl
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+# source commands_etat3.tcl
+# source commands_etat3.tcl
+# restart
+# source commands_etat3.tcl
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+# source commands_etat3.tcl
