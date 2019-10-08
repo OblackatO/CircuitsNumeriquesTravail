@@ -78,8 +78,7 @@ p: PROCESS(clk, rst) BEGIN
 			FPrB_G <= "100";
 			FSec <= "100";
 		WHEN 4 =>
-			IF cnt /= 30 THEN cnt <= cnt + 1;
-			ELSIF cnt = 30 AND Det_A = '1' THEN
+			IF cnt = 30 AND Det_A = '1' THEN
 				state <= 5;
 				FPrA <= "010";
 				FPrB_A <= "001";
@@ -94,14 +93,15 @@ p: PROCESS(clk, rst) BEGIN
 				FSec <= "100";
 				cnt <= 0;
 			END IF;
+			IF cnt /= 30 THEN cnt <= cnt + 1;
+			END IF;
 		WHEN 5 => state <= 6;
 			FPrA <= "100";
 			FPrB_A <= "001";
 			FPrB_G <= "001";
 			FSec <= "100";
 		WHEN 6 =>
-			IF cnt /= 10 THEN cnt <= cnt +1;
-			ELSIF (cnt = 10 OR Det_A = '0') AND Det_B = '0' THEN cnt <= 0;
+			IF (cnt = 10 OR Det_A = '0') AND Det_B = '0' THEN cnt <= 0;
 				state <= 7;
 				FPrA <= "100";
 				FPrB_A <= "001";
@@ -113,6 +113,8 @@ p: PROCESS(clk, rst) BEGIN
 				FPrB_A <= "010";
 				FPrB_G <= "010";
 				FSec <= "100";
+			END IF;
+			IF cnt /= 10 THEN cnt <= cnt +1;
 			END IF;
 		WHEN 7 =>  state <= 4;
 			FPrA <= "001";
@@ -130,13 +132,14 @@ p: PROCESS(clk, rst) BEGIN
 			FPrB_G <= "100";
 			FSec <= "001";
 		WHEN 10 =>
-			IF cnt /= 10 THEN cnt <= cnt +1;
-			ELSIF cnt = 10 OR Det_B = '0' THEN state <= 11;
+			IF cnt = 10 OR Det_B = '0' THEN state <= 11;
 				cnt <= 0;
 				FPrA <= "100";
 				FPrB_A <= "100";
 				FPrB_G <= "100";
 				FSec <= "010";
+			END IF;
+			IF cnt /= 10 THEN cnt <= cnt +1;
 			END IF;
 		WHEN 11 =>  state <= 4;
 			FPrA <= "001";
