@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2019-10-08T12:22:10</DateModified>
+  <DateModified>2019-10-08T13:42:48</DateModified>
   <ModuleName>Carrefour_source</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/estti379/VHDL/Carrefour/iseconfig/Carrefour_source.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/estti379/VHDL/Carrefour/</ImplementationReportsDirectory>
+  <SavedFilePath>/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/iseconfig/Carrefour_source.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/</ImplementationReportsDirectory>
   <DateInitialized>2019-10-01T15:46:52</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>
