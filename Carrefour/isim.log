@@ -11,32 +11,6 @@ Time resolution is 1 ps
 # run 1000 ns
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.
-# pwd
-# pwd
-# cd ~/
-# pwd
-# cd /home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour
-
-# cd /home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour
-
-# cd /home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour
-# pwd
-# source commands_etat3.tcl
-# source commands_etat3.tcl
-# restart
-# source commands_etat3.tcl
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-# source commands_etat3.tcl
-# source commands_etat3.tcl
-# source commands_etat3.tcl
-# source commands_etat3.tcl
-# source commands_etat3.tcl
-# source commands_etat3.tcl
-# cls
-# source commands_etat3.tcl
-# source commands_etat3.tcl
-# source commands_etat3.tcl
 # source commands_etat3.tcl
 # source commands_etat3.tcl
 # source commands_etat3.tcl
@@ -44,10 +18,3 @@ Finished circuit initialization process.
 # source commands_etat3.tcl
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.
-# source commands_etat3.tcl
-# source commands_etat3.tcl
-# restart
-# source commands_etat3.tcl
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-# source commands_etat3.tcl

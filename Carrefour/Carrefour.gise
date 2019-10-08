@@ -80,7 +80,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1570535974" xil_pn:in_ck="-8411760495823439031" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1570535974">
+    <transform xil_pn:end_ts="1570541283" xil_pn:in_ck="-8411760495823439031" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1570541283">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="Carrefour_source.vhd"/>
@@ -97,12 +97,12 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1570535980" xil_pn:in_ck="-8411760495823439031" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1570535980">
+    <transform xil_pn:end_ts="1570541303" xil_pn:in_ck="-8411760495823439031" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1570541303">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="Carrefour_source.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1570535983" xil_pn:in_ck="-8411760495823439031" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-6504981301142456091" xil_pn:start_ts="1570535980">
+    <transform xil_pn:end_ts="1570541305" xil_pn:in_ck="-8411760495823439031" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-6504981301142456091" xil_pn:start_ts="1570541303">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
@@ -111,9 +111,10 @@
       <outfile xil_pn:name="Carrefour_source_isim_beh.exe"/>
       <outfile xil_pn:name="fuse.log"/>
       <outfile xil_pn:name="isim"/>
+      <outfile xil_pn:name="isim.log"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1570537600" xil_pn:in_ck="-2435852617881583032" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="5267878515684060786" xil_pn:start_ts="1570537600">
+    <transform xil_pn:end_ts="1570541305" xil_pn:in_ck="-2435852617881583032" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="5267878515684060786" xil_pn:start_ts="1570541305">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="Carrefour_source_isim_beh.wdb"/>
@@ -151,7 +152,9 @@
     <transform xil_pn:end_ts="1570535930" xil_pn:in_ck="-8411760495823439031" xil_pn:name="TRANEXT_xstsynthesize_spartan6" xil_pn:prop_ck="2411548903090160669" xil_pn:start_ts="1570535924">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
       <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="Carrefour_source.lso"/>
       <outfile xil_pn:name="Carrefour_source.ngc"/>
@@ -173,6 +176,7 @@
     <transform xil_pn:end_ts="1570535934" xil_pn:in_ck="-8411760495823447777" xil_pn:name="TRANEXT_ngdbuild_FPGA" xil_pn:prop_ck="-1503647082780233297" xil_pn:start_ts="1570535930">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="Carrefour_source.bld"/>
       <outfile xil_pn:name="Carrefour_source.ngd"/>
       <outfile xil_pn:name="Carrefour_source_ngdbuild.xrpt"/>
@@ -182,6 +186,7 @@
     <transform xil_pn:end_ts="1570535943" xil_pn:in_ck="-8411760495823447776" xil_pn:name="TRANEXT_map_spartan6" xil_pn:prop_ck="6093601622908603872" xil_pn:start_ts="1570535934">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="Carrefour_source.pcf"/>
       <outfile xil_pn:name="Carrefour_source_map.map"/>
       <outfile xil_pn:name="Carrefour_source_map.mrp"/>
@@ -195,6 +200,7 @@
     <transform xil_pn:end_ts="1570535952" xil_pn:in_ck="2181447520235026489" xil_pn:name="TRANEXT_par_spartan6" xil_pn:prop_ck="93661965788626211" xil_pn:start_ts="1570535943">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="Carrefour_source.ncd"/>
       <outfile xil_pn:name="Carrefour_source.pad"/>
       <outfile xil_pn:name="Carrefour_source.par"/>
@@ -209,6 +215,7 @@
     <transform xil_pn:end_ts="1570535952" xil_pn:in_ck="-8411760495823447908" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416185" xil_pn:start_ts="1570535948">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="Carrefour_source.twr"/>
       <outfile xil_pn:name="Carrefour_source.twx"/>
       <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>

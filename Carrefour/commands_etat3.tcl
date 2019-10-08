@@ -39,3 +39,27 @@ isim force add det_a 0
 for {set i 0} {$i < 10} {incr i} {
 	clock
 }
+isim force add det_b 1
+clock 
+clock 
+for {set i 0} {$i < 20} {incr i} {
+	clock
+}
+isim force add det_b 0
+for {set i 0} {$i < 10} {incr i} {
+	clock
+}
+
+isim force add det_b 1
+clock 
+clock 
+for {set i 0} {$i < 5} {incr i} {
+	clock
+}
+isim force add det_a 1
+for {set i 0} {$i < 5} {incr i} {
+	clock
+}
+for {set i 0} {$i < 100} {incr i} {
+	clock
+}
