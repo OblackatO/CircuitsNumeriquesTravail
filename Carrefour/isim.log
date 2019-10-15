@@ -18,3 +18,4 @@ Finished circuit initialization process.
 # source commands_etat3.tcl
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.
+# exit 0
