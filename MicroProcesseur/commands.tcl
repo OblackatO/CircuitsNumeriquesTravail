@@ -9,7 +9,7 @@ proc reset {} {
 	run 500 ns
     isim force add write_read 0
     isim force add address 0
-    isim force add data_entry 0
+    isim force add data_entry  0
 }
 
 reset
