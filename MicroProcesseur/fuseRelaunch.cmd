@@ -1,1 +1,0 @@
--intstyle "ise" -incremental -lib "secureip" -o "/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/MicroProcesseur/RAM_isim_beh.exe" -prj "/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/MicroProcesseur/RAM_beh.prj" "work.RAM" 
