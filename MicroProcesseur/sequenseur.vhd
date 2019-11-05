@@ -48,47 +48,59 @@ architecture Behavioral of SEQUENSEUR is
 	SIGNAL address_register: registre (2 DOWNTO 1);
 begin
    seq : PROCESS(clk, rst) BEGIN
-		IF rst = '1' THEN
+		IF rst = '0' THEN
 			state <= 1;
+			write_read <= '0';
 			address_register(1) <= "00000000";
 			address_register(2) <= "00000000";
-			address <= address_register(2) & address_register(1);
+			address <= "0000000000000000";
 		ELSIF clk'event AND clk = '1' THEN
 			CASE state IS
 				WHEN 1 =>
 					seq_register(1) <= data_entry;
-					IF (seq_register(1)(7) = '0' OR (seq_register(1)(6) = '0' AND seq_register(1)(5) = '0' )) THEN
+					IF data_entry = "UUUUUUUU" OR data_entry = "ZZZZZZZZ" OR data_entry = "WWWWWWWW" THEN
+						--empty
+					ELSIF (data_entry(7) = '0' OR (data_entry(6) = '0' AND data_entry(5) = '0' ) ) THEN
 						state <= 4;
 					ELSE state <= 2;
-						address_register(1) <= address_register(1) + "00000001";
-						IF address_register(1) = "00000000" THEN
+						IF address_register(1) = "11111111" THEN
 							address_register(2) <= address_register(2) + "00000001";
+							address <= address_register(2) + "00000001" & address_register(1) + "00000001";
+						ELSE
+							address_register(1) <= address_register(1) + "00000001";
+							address <= address_register(2) & address_register(1) + "00000001";
 						END IF;
-						address <= address_register(2) & address_register(1);
 					END IF;
 				WHEN 2 =>
 					seq_register(2) <= data_entry;
 					IF seq_register(1)(7) = '1' AND ( (seq_register(1)(6) = '0' AND seq_register(1)(5) = '1') OR (seq_register(1)(6) = '1' AND seq_register(1)(5) = '1') ) THEN
 						state <= 4;
 					ELSE state <= 3;
-						address_register(1) <= address_register(1) + "00000001";
-						IF address_register(1) = "00000000" THEN
+						IF address_register(1) = "11111111" THEN
 							address_register(2) <= address_register(2) + "00000001";
+							address <= address_register(2) + "00000001" & address_register(1) + "00000001";
+						ELSE
+							address_register(1) <= address_register(1) + "00000001";
+							address <= address_register(2) & address_register(1) + "00000001";
 						END IF;
-						address <= address_register(2) & address_register(1);
 					END IF;
 				WHEN 3 =>
 					seq_register(3) <= data_entry;
 					state <= 4;
 				WHEN 4 =>
 					state <= 1;
-					address_register(1) <= address_register(1) + "00000001";
-					IF address_register(1) = "00000000" THEN
+					IF address_register(1) = "11111111" THEN
 						address_register(2) <= address_register(2) + "00000001";
+						address <= address_register(2) + "00000001" & address_register(1) + "00000001";
+					ELSE
+						address_register(1) <= address_register(1) + "00000001";
+						address <= address_register(2) & address_register(1) + "00000001";
 					END IF;
 					
 					--not implemented
-					address <= address_register(2) & address_register(1);
+					
+					
+
 				WHEN OTHERS => null;
 			END CASE;
 		END IF;
