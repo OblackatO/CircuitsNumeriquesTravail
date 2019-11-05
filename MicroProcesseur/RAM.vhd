@@ -43,10 +43,10 @@ end RAM;
 architecture Behavioral of RAM is
     type MEMORY is array (integer range <>) of STD_LOGIC_VECTOR(7 downto 0);
     SIGNAL mem_r, mem_w : MEMORY(0 to 1024-1 );
-    SIGNAL bios : MEMORY(0 to 5);
+    SIGNAL bios : MEMORY(0 to 255);
 begin
-    mem_r(6 to 1023) <= mem_w(6 to 1023);
-    mem_r(0 to 5) <= bios;
+    mem_r(256 to 1023) <= mem_w(256 to 1023);
+    mem_r(0 to 255) <= bios;
     read : PROCESS(write_read, mem_r, address) BEGIN
             IF write_read = '0' then  
                 data_exit <= mem_r(to_integer(Unsigned(address)));
@@ -62,9 +62,9 @@ begin
             end if;
     end PROCESS;
 	 
-	 bios <= ("00000000",
-					"10100000", "10100000",
-					"11010000","11010000","11010000");
+	 bios(0 to 5) <= ("00000000",
+					"10100000", "00111010",
+					"11010000", "10100110","00110000");
 	 
 end Behavioral;
 
