@@ -49,6 +49,7 @@ architecture Behavioral of CPU is
 	SIGNAL address_register: registre (2 DOWNTO 1); 
 	SIGNAL regs: registre(1 to 8);
 	SIGNAL alu_regs : registre(0 to 1);
+	SIGNAL flag_reg :  STD_LOGIC_VECTOR(7 downto 0);
 begin
    sequenceur : PROCESS(clk, rst) BEGIN
 		IF rst = '0' THEN
@@ -110,21 +111,7 @@ begin
 						address <= address_register(2) & address_register(1) + "00000001";
 					END IF;
 					
-<<<<<<< Updated upstream
-					IF seq_register(1)(7) = '0' AND seq_register(1)(6) = '0' THEN
-						IF to_integer(Unsigned(seq_register(1)(2 downto 0))) = to_integer(Unsigned(seq_register(1)(5 downto 3))) THEN
-                   --Not implemented
-                  ELSE
-							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= regs(to_integer(Unsigned(seq_register(1)(5 downto 3))));
-						END IF;
-                                       
-					ELSIF seq_register(1)(7) = '1' AND seq_register(1)(4) = '0' AND seq_register(1)(3)= '0' THEN
-						IF seq_register(1)(6) = '1' AND seq_register(1)(5) = '1' THEN
-							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= seq_register(2);
-						ELSE
-							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= data_entry;
-=======
-					IF seq_register(1)(7) = '1' THEN
+					IF seq_register(1)(7) = '0' THEN
 						IF seq_register(1)(6) = '0' THEN
 							IF to_integer(Unsigned(seq_register(1)(2 downto 0))) = to_integer(Unsigned(seq_register(1)(5 downto 3))) THEN
 							 --Not implemented
@@ -147,15 +134,25 @@ begin
 							ELSE
 								regs(to_integer(Unsigned(seq_register(1)(2 downto 0)) <= data_entry;
 							END IF;
-							
-						IF seq_register(1)(4) ='0' AND seq_register(1)(3)='1' THEN
+						
+						ELSIF seq_register(1)(4) ='0' AND seq_register(1)(3)='1' THEN
 							IF seq_register(1)(6) = '1' AND seq_register(1)(5) = '1' THEN
 									-- not implemented
 							ELSE 
 								data_out <= regs(to_integer(Unsigned(seq_register(1)(2 downto 0));
 							END IF;
->>>>>>> Stashed changes
+						
+						ELSIF seq_register(1)(4) ='1' AND seq_register(1)(3)='0' THEN
+							-- JMP
+							IF flag_reg(to_integer(Unsigned(seq_register(1)(2 downto 0)))) = '1' THEN
+							END IF;
+								
+								
+						
 						END IF;
+						
+						
+						
 					END IF;
 					--not implemented
 				WHEN OTHERS => null;
@@ -168,8 +165,6 @@ begin
 	--alu : PROCESS() BEGIN
 	
 	--end process;
-	
-	
 	
 end Behavioral;
 
