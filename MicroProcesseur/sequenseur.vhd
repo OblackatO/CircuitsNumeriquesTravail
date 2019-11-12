@@ -44,8 +44,9 @@ end SEQUENSEUR;
 architecture Behavioral of SEQUENSEUR is
 	TYPE registre IS ARRAY (integer range <>) of STD_LOGIC_VECTOR(7 downto 0);
 	SIGNAL state: STD_LOGIC_VECTOR(2 downto 0);
-	SIGNAL seq_register: registre(1 to 3);
-	SIGNAL address_register: registre (2 DOWNTO 1);
+	SIGNAL seq_register: registre(1 to 3); -- 1er place -- 2eme -- 3eme
+	SIGNAL address_register: registre (2 DOWNTO 1); 
+	SIGNAL regs: registre(1 to 8);
 begin
    seq : PROCESS(clk, rst) BEGIN
 		IF rst = '0' THEN
@@ -95,6 +96,11 @@ begin
 						address <= address_register(2) & address_register(1) + "00000001";
 					END IF;
 					
+					IF seq_register(1) = "00" THEN
+						regs(seq_regis(2)) <= regs(seq_regis(3)); 
+					ELSIF
+					
+					END IF;
 					--not implemented
 					
 					
