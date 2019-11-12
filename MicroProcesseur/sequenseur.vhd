@@ -61,6 +61,10 @@ begin
 					seq_register(1) <= data_entry;
 					IF (data_entry(7) = '0' OR (data_entry(6) = '0' AND data_entry(5) = '0' ) ) THEN
 						state <= "100";
+						IF data_entry(7) = '1' AND (data_entry(4 downto 3) = "00" OR data_entry(4 downto 3) = "01") THEN
+							-- addressage indirecte
+							address <= regs(6) & regs(7);
+						END IF;
 					ELSE state <= "010";
 						IF address_register(1) = "11111111" THEN
 							address_register(2) <= address_register(2) + "00000001";
@@ -74,6 +78,10 @@ begin
 					seq_register(2) <= data_entry;
 					IF seq_register(1)(7) = '1' AND ( (seq_register(1)(6) = '0' AND seq_register(1)(5) = '1') OR (seq_register(1)(6) = '1' AND seq_register(1)(5) = '1') ) THEN
 						state <= "100";
+						IF NOT (seq_register(1)(4) = '1' AND seq_register(1)(3) = '0') THEN
+							-- addressage mixte
+							address <= data_entry & regs(7);
+						END IF;
 					ELSE state <= "011";
 						IF address_register(1) = "11111111" THEN
 							address_register(2) <= address_register(2) + "00000001";
@@ -86,6 +94,10 @@ begin
 				WHEN "011" =>
 					seq_register(3) <= data_entry;
 					state <= "100";
+					IF NOT (seq_register(1)(4) = '1' AND seq_register(1)(3) = '0') THEN
+						-- addressage directe 
+						address <= seq_register(2) & data_entry;
+					END IF;
 				WHEN "100" =>
 					state <= "001";
 					IF address_register(1) = "11111111" THEN
@@ -96,25 +108,21 @@ begin
 						address <= address_register(2) & address_register(1) + "00000001";
 					END IF;
 					
-					IF seq_register(1)(7) = "0" AND seq_register(1)(6) = "0" THEN
+					IF seq_register(1)(7) = '0' AND seq_register(1)(6) = '0' THEN
 						IF to_integer(Unsigned(seq_register(1)(2 downto 0))) = to_integer(Unsigned(seq_register(1)(5 downto 3))) THEN
                    --Not implemented
                   ELSE
-							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= regs(to_integer(Unsigned(seq_register(1)(5 downto 3))))
+							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= regs(to_integer(Unsigned(seq_register(1)(5 downto 3))));
 						END IF;
                                        
-					ELSIF seq_register(1)(7) = '1' AND seq_register(1)(4) ='0' AND seq_register(1)(3)='0' THEN
+					ELSIF seq_register(1)(7) = '1' AND seq_register(1)(4) = '0' AND seq_register(1)(3)= '0' THEN
 						IF seq_register(1)(6) = '1' AND seq_register(1)(5) = '1' THEN
-							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)) <= seq_register(2);
+							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= seq_register(2);
 						ELSE
-							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)) <= data_entry;
+							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= data_entry;
 						END IF;
-						
 					END IF;
 					--not implemented
-					
-					
-
 				WHEN OTHERS => null;
 			END CASE;
 		END IF;
