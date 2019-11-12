@@ -31,7 +31,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity SEQUENSEUR is
+entity CPU is
     PORT(clk, rst: IN STD_LOGIC;
 			write_read: OUT STD_LOGIC;
          data_entry: IN STD_LOGIC_VECTOR(7 downto 0);
@@ -39,16 +39,16 @@ entity SEQUENSEUR is
         );
 
     
-end SEQUENSEUR;
+end CPU;
 
-architecture Behavioral of SEQUENSEUR is
+architecture Behavioral of CPU is
 	TYPE registre IS ARRAY (integer range <>) of STD_LOGIC_VECTOR(7 downto 0);
 	SIGNAL state: STD_LOGIC_VECTOR(2 downto 0);
 	SIGNAL seq_register: registre(1 to 3); -- 1er place -- 2eme -- 3eme
 	SIGNAL address_register: registre (2 DOWNTO 1); 
 	SIGNAL regs: registre(1 to 8);
 begin
-   seq : PROCESS(clk, rst) BEGIN
+   sequenceur : PROCESS(clk, rst) BEGIN
 		IF rst = '0' THEN
 			state <= "001";
 			write_read <= '0';

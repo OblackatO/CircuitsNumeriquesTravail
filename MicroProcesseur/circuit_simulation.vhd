@@ -33,7 +33,7 @@ entity circuit_simulation is
 end circuit_simulation;
 
 architecture Behavioral of circuit_simulation is
-component SEQUENSEUR is
+component CPU is
     PORT(clk, rst: IN STD_LOGIC;
 			write_read: OUT STD_LOGIC;
          data_entry: IN STD_LOGIC_VECTOR(7 downto 0);
@@ -59,7 +59,7 @@ end component;
 begin
 	rst <= '0','1' after 10 ns;
 	clk <= not clk after 50 ns;
-	c_sequenseur: SEQUENSEUR port map(clk, rst, wr, data_m2c, address);
+	c_cpu: CPU port map(clk, rst, wr, data_m2c, address);
 	c_ram: RAM port map (clk, wr, data_c2m, data_m2c, address);
 
 end Behavioral;
