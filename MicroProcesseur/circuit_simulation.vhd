@@ -37,6 +37,7 @@ component CPU is
     PORT(clk, rst: IN STD_LOGIC;
 			write_read: OUT STD_LOGIC;
          data_entry: IN STD_LOGIC_VECTOR(7 downto 0);
+			data_out: OUT STD_LOGIC_VECTOR(7 downto 0);
          address: OUT STD_LOGIC_VECTOR(15 downto 0)
         );
 
@@ -59,7 +60,7 @@ end component;
 begin
 	rst <= '0','1' after 10 ns;
 	clk <= not clk after 50 ns;
-	c_cpu: CPU port map(clk, rst, wr, data_m2c, address);
+	c_cpu: CPU port map(clk, rst, wr, data_m2c, data_c2m, address);
 	c_ram: RAM port map (clk, wr, data_c2m, data_m2c, address);
 
 end Behavioral;
