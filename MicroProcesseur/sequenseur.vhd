@@ -96,10 +96,15 @@ begin
 						address <= address_register(2) & address_register(1) + "00000001";
 					END IF;
 					
-					IF seq_register(1) = "00" THEN
-						regs(seq_regis(2)) <= regs(seq_regis(3)); 
-					ELSIF
-					
+					IF seq_register(1)  = "00" THEN
+						--regs(seq_regis(2)) <= regs(seq_regis(3)); 
+					ELSIF seq_register(1)(7) = '1' AND seq_register(1)(4) ='0' AND seq_register(1)(3)='0' THEN
+						IF seq_register(1)(6) = '1' AND seq_register(1)(5) = '1' THEN
+							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)) <= seq_register(2);
+						ELSE
+							regs(to_integer(Unsigned(seq_register(1)(2 downto 0)) <= data_entry;
+						END IF;
+						
 					END IF;
 					--not implemented
 					
