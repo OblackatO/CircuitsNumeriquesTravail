@@ -1,7 +1,0 @@
-xst -intstyle ise -ifn "/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source.xst" -ofn "/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source.syr" 
-xst -intstyle ise -ifn "/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source.xst" -ofn "/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source.syr" 
-xst -intstyle ise -ifn "/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source.xst" -ofn "/home/peterpan/Desktop/Semester5/Module5.2/Circuits/travail/CircuitsNumeriquesTravail/Carrefour/Carrefour_source.syr" 
-ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc6slx9-tqg144-3 Carrefour_source.ngc Carrefour_source.ngd  
-map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o Carrefour_source_map.ncd Carrefour_source.ngd Carrefour_source.pcf 
-par -w -intstyle ise -ol high -mt off Carrefour_source_map.ncd Carrefour_source.ncd Carrefour_source.pcf 
-trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml Carrefour_source.twx Carrefour_source.ncd -o Carrefour_source.twr Carrefour_source.pcf 
