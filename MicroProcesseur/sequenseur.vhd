@@ -145,9 +145,20 @@ begin
 						ELSIF seq_register(1)(4) ='1' AND seq_register(1)(3)='0' THEN
 							-- JMP
 							IF flag_reg(to_integer(Unsigned(seq_register(1)(2 downto 0)))) = '1' THEN
+								IF seq_register(1)(6 downto 5) = "01" THEN 		--mixte
+									address_register(1) <= seq_register(2);
+								ELSIF seq_register(1)(6 downto 5) = "10" THEN 	-- direct 10
+									address_register(1) <= seq_register(2);
+									address_register(2) <= seq_register(3);
+								ELSIF seq_register(1)(6 downto 5) = "11" THEN 	-- relativ 11
+									adress_register(1) <= seq_register(2) + adress_register(1);
+								END IF;
+								
 							END IF;
+							
 								
 								
+							
 						
 						END IF;
 						
