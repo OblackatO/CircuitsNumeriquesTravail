@@ -31,7 +31,7 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity RAM is
-    PORT(clk, write_read: IN STD_LOGIC;
+    PORT(clk, write_read, activation: IN STD_LOGIC;
          data_entry: IN STD_LOGIC_VECTOR(7 downto 0);
          data_exit: OUT STD_LOGIC_VECTOR(7 downto 0);
          address: IN STD_LOGIC_VECTOR(15 downto 0)
@@ -48,7 +48,7 @@ begin
     mem_r(256 to 1023) <= mem_w(256 to 1023);
     mem_r(0 to 255) <= bios;
     read : PROCESS(write_read, mem_r, address) BEGIN
-            IF write_read = '0' then  
+            IF write_read = '0' AND activation = '1' then  
                 data_exit <= mem_r(to_integer(Unsigned(address)));
             ELSE data_exit <= "ZZZZZZZZ";
             end if;
@@ -56,7 +56,7 @@ begin
 
     write : PROCESS(clk) BEGIN
             IF clk'event and clk = '1' then  
-                IF write_read = '1' then 
+                IF write_read = '1' AND activation = '1' then 
                     mem_w(to_integer(Unsigned(address))) <= data_entry;
                 end if;
             end if;

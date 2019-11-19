@@ -152,6 +152,8 @@ begin
 					
 				WHEN "100" =>
 					state <= "001";
+					ram_activation <= '1';
+					write_read <= '0';
 					IF address_register(1) = "11111111" THEN
 						address_register(2) <= address_register(2) + "00000001";
 						address <= address_register(2) + "00000001" & "00000000";
@@ -165,30 +167,22 @@ begin
 							IF to_integer(Unsigned(seq_register(1)(2 downto 0))) = to_integer(Unsigned(seq_register(1)(5 downto 3))) THEN
 							 --Not implemented
 							ELSE
-								regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= regs(to_integer(Unsigned(seq_register(1)(5 downto 3))))
+								regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= regs(to_integer(Unsigned(seq_register(1)(5 downto 3))));
 							END IF;
-						ELSIF seq_register(1)(6) = '1' AND seq_register(1)(5) = '1' THEN
-							IF seq_register(1)(4) = '1' THEN
-								-- Write
-								alu_regs(to_integer(Unsigned(seq_register(1)(3))  <= regs(to_integer(Unsigned(seq_register(1)(2 downto 0));
-							ELSE
-								-- Read
-								regs(to_integer(Unsigned(seq_register(1)(2 downto 0)) <= alu_regs(to_integer(Unsigned(seq_register(1)(3))
-							END IF;
-						END IF;                                       
+						END IF;
 					ELSIF seq_register(1)(7) = '1' THEN
 						IF seq_register(1)(4) ='0' AND seq_register(1)(3)='0' THEN
 							IF seq_register(1)(6) = '1' AND seq_register(1)(5) = '1' THEN
-								regs(to_integer(Unsigned(seq_register(1)(2 downto 0)) <= seq_register(2);
+								regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= seq_register(2);
 							ELSE
-								regs(to_integer(Unsigned(seq_register(1)(2 downto 0)) <= data_entry;
+								regs(to_integer(Unsigned(seq_register(1)(2 downto 0)))) <= data_entry;
 							END IF;
 						
 						ELSIF seq_register(1)(4) ='0' AND seq_register(1)(3)='1' THEN
 							IF seq_register(1)(6) = '1' AND seq_register(1)(5) = '1' THEN
 									-- not implemented
 							ELSE 
-								data_out <= regs(to_integer(Unsigned(seq_register(1)(2 downto 0));
+								data_out <= regs(to_integer(Unsigned(seq_register(1)(2 downto 0))));
 							END IF;
 						
 						ELSIF seq_register(1)(4) ='1' AND seq_register(1)(3)='0' THEN
@@ -200,19 +194,10 @@ begin
 									address_register(1) <= seq_register(2);
 									address_register(2) <= seq_register(3);
 								ELSIF seq_register(1)(6 downto 5) = "11" THEN 	-- relativ 11
-									adress_register(1) <= seq_register(2) + adress_register(1);
+									address_register(1) <= seq_register(2) + address_register(1);
 								END IF;
-								
 							END IF;
-							
-								
-								
-							
-						
-						END IF;
-						
-						
-						
+						END IF;		
 					END IF;
 					ram_activation <= '1';
 				WHEN OTHERS => null;
