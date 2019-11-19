@@ -33,7 +33,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity CPU is
     PORT(clk, rst: IN STD_LOGIC;
-			write_read: OUT STD_LOGIC;
+			write_read, ram_activation: OUT STD_LOGIC;
          data_entry: IN STD_LOGIC_VECTOR(7 downto 0);
 			data_out: OUT STD_LOGIC_VECTOR(7 downto 0);
          address: OUT STD_LOGIC_VECTOR(15 downto 0)
@@ -54,21 +54,37 @@ begin
    sequenceur : PROCESS(clk, rst) BEGIN
 		IF rst = '0' THEN
 			state <= "001";
-			write_read <= '0';
+			write_read <= '0'; --0 to read ram, 1 to write
+			ram_activation <= '1';
 			address_register(1) <= "00000000";
 			address_register(2) <= "00000000";
 			address <= "0000000000000000";
 		ELSIF clk'event AND clk = '1' THEN
 			CASE state IS
+				
 				WHEN "001" =>
 					seq_register(1) <= data_entry;
+					--Soit on est dans les premiers jeux d'intructions, soit dans LD, ST ou JMP en mode addressage indirecte
 					IF (data_entry(7) = '0' OR (data_entry(6) = '0' AND data_entry(5) = '0' ) ) THEN
 						state <= "100";
-						IF data_entry(7) = '1' AND (data_entry(4 downto 3) = "00" OR data_entry(4 downto 3) = "01") THEN
-							-- addressage indirecte
-							address <= regs(6) & regs(7);
+						ram_activation <= '0';
+						--Mode addressage indirect LD or ST
+						IF data_entry(7) = '1' THEN
+							-- LD
+							IF data_entry(4 downto 3) = "00" THEN
+								address <= regs(6) & regs(7);
+								write_read <= '0';
+								ram_activation <= '1';
+							-- ST
+							ELSIF data_entry(4 downto 3) = "01" THEN
+								address <= regs(6) & regs(7);
+								write_read <= '1';
+								ram_activation <= '1';
+							END IF;
 						END IF;
 					ELSE state <= "010";
+						ram_activation <= '1';
+						write_read <= '0';
 						IF address_register(1) = "11111111" THEN
 							address_register(2) <= address_register(2) + "00000001";
 							address <= address_register(2) + "00000001" & "00000000";
@@ -77,30 +93,63 @@ begin
 							address <= address_register(2) & address_register(1) + "00000001";
 						END IF;
 					END IF;
+					
 				WHEN "010" =>
 					seq_register(2) <= data_entry;
-					IF seq_register(1)(7) = '1' AND ( (seq_register(1)(6) = '0' AND seq_register(1)(5) = '1') OR (seq_register(1)(6) = '1' AND seq_register(1)(5) = '1') ) THEN
-						state <= "100";
-						IF NOT (seq_register(1)(4) = '1' AND seq_register(1)(3) = '0') THEN
-							-- addressage mixte
-							address <= data_entry & regs(7);
-						END IF;
-					ELSE state <= "011";
-						IF address_register(1) = "11111111" THEN
-							address_register(2) <= address_register(2) + "00000001";
-							address <= address_register(2) + "00000001" & "00000000";
-						ELSE
-							address_register(1) <= address_register(1) + "00000001";
-							address <= address_register(2) & address_register(1) + "00000001";
+					--On est en LD, ST ou JMP mode addressage mixte ou JMP mode relatif
+					IF seq_register(1)(7) = '1' THEN	
+						--mode addressage mixte
+						IF seq_register(1)(6 downto 5) = "01" THEN
+							state <= "100";
+							--LD
+							IF seq_register(1)(4 downto 3) = "00" THEN
+								address <= data_entry & regs(7);
+								ram_activation <= '1';
+								write_read <= '0';
+							--ST
+							ELSIF seq_register(1)(4 downto 3) = "01" THEN
+								address <= data_entry & regs(7);
+								ram_activation <= '1';
+								write_read <= '1';
+							--JMP
+							ELSIF seq_register(1)(4 downto 3) = "10" THEN
+								ram_activation <= '0';
+							END IF;
+						--mode LD constante ou JMP relatif
+						ELSIF seq_register(1)(6 downto 5) = "11" THEN
+							state <= "100";
+							ram_activation <= '0';
+						ELSE state <= "011";
+							ram_activation <= '1';
+							write_read <= '0';
+							IF address_register(1) = "11111111" THEN
+								address_register(2) <= address_register(2) + "00000001";
+								address <= address_register(2) + "00000001" & "00000000";
+							ELSE
+								address_register(1) <= address_register(1) + "00000001";
+								address <= address_register(2) & address_register(1) + "00000001";
+							END IF;
 						END IF;
 					END IF;
+					
 				WHEN "011" =>
 					seq_register(3) <= data_entry;
 					state <= "100";
-					IF NOT (seq_register(1)(4) = '1' AND seq_register(1)(3) = '0') THEN
-						-- addressage directe 
+					-- LD mode addressage directe
+					IF seq_register(1)(4 downto 3) = "00" THEN
 						address <= seq_register(2) & data_entry;
+						ram_activation <= '1';
+						write_read <= '0';
+					-- ST mode addressage directe
+					ELSIF seq_register(1)(4 downto 3) = "01" THEN
+						address <= seq_register(2) & data_entry;
+						ram_activation <= '1';
+						write_read <= '1';
+					-- JMP mode addressage directe
+					ELSIF seq_register(1)(4 downto 3) = "10" THEN
+						ram_activation <= '0';
 					END IF;
+					
 				WHEN "100" =>
 					state <= "001";
 					IF address_register(1) = "11111111" THEN
@@ -126,7 +175,7 @@ begin
 								-- Read
 								regs(to_integer(Unsigned(seq_register(1)(2 downto 0)) <= alu_regs(to_integer(Unsigned(seq_register(1)(3))
 							END IF;
-                                       
+						END IF;                                       
 					ELSIF seq_register(1)(7) = '1' THEN
 						IF seq_register(1)(4) ='0' AND seq_register(1)(3)='0' THEN
 							IF seq_register(1)(6) = '1' AND seq_register(1)(5) = '1' THEN
@@ -165,7 +214,7 @@ begin
 						
 						
 					END IF;
-					--not implemented
+					ram_activation <= '1';
 				WHEN OTHERS => null;
 			END CASE;
 		END IF;
