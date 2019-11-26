@@ -207,9 +207,37 @@ begin
 	
 	
 	
-	--alu : PROCESS() BEGIN
-	
-	--end process;
+	alu : PROCESS(regs, seq_register) BEGIN
+	variable op1, op2, res: STD_LOGIC_VECTOR(8 downto 0);
+	begin
+		op1(7 downto 1) := regs(1);
+		op1(8) := '0';
+		op2(7 downto 1) := regs(2);
+		op2(8) := '0';
+		CASE seq_register(1)(3 downto 1)
+			WHEN "0000" =>
+			WHEN "0001" =>
+			WHEN "0010" =>
+			WHEN "0011" =>
+			
+			WHEN "0100" =>
+			WHEN "0101" =>
+			WHEN "0110" =>
+			WHEN "0111" =>
+			
+			WHEN "1000" =>
+			WHEN "1001" =>
+			WHEN "1010" =>
+			WHEN "1011" =>
+			
+			WHEN "1100" =>
+			WHEN "1101" =>
+			WHEN "1110" =>
+			WHEN "1111" =>
+			
+		END CASE;
+		
+	end process;
 	
 end Behavioral;
 
