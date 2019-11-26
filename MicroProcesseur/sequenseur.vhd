@@ -255,7 +255,28 @@ begin
 			WHEN "1110" =>
 			WHEN "1111" =>
 			WHEN OTHERS => null;
-
+			
+			IF res = 0 THEN -- zero ou pas zero
+				flag_reg(1) <= 1;
+				flag_reg(2) <= 0;
+			ELSE
+				flag_reg(1) <= 0;
+				flag_reg(2) <= 1;
+			END IF;
+			
+			IF res(8) = 1 THEN -- positif et neg
+				flag_reg(3) <= 0;
+				flag_reg(4) <= 1;
+			ELSE 
+				flag_reg(3) <= 1;
+				flag_reg(4) <= 0;
+			END IF;
+			
+			IF res(0) = 0 THEN -- pair ou impair
+				flag_reg(5) <= 1;
+			ELSE
+				flag_reg(5) <= 0;
+			END IF;
 			
 		END CASE;
 		
