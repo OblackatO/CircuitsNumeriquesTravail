@@ -218,68 +218,107 @@ begin
 			WHEN "0000" => 
 				-- ADD
 				res := op1 + op2;
+				flag_reg(7) <= res(8) xor res(7);
+				flag_reg(6) <= res(8) xor op1(8) xor op2(8);
 				regs(1) <= res;
 			WHEN "0001" => 
 				-- SUB
 				res := op1 - op2;
+				flag_reg(7) <= res(8) xor res(7);
+				flag_reg(6) <= res(8) xor op1(8) xor op2(8);
 				regs(1) <= res;
 			WHEN "0010" => 
 				-- CMP
 				res := op1 - op2;
+				flag_reg(7) <= res(8) xor res(7);
+				flag_reg(6) <= res(8) xor op1(8) xor op2(8);
 			WHEN "0011" =>
 				-- AND
 				res := op1 and op2;
+				flag_reg(6) <= '0';
+				flag_reg(7) <= '0';
 				regs(1) <= res;
 			WHEN "0100" =>
 				-- OR
 				res := op1 or op2;
+				flag_reg(6) <= '0';
+				flag_reg(7) <= '0';
 				regs(1) <= res;
 			WHEN "0101" =>
 				-- XOR
 				res := op1 xor op2;
+				flag_reg(6) <= '0';
+				flag_reg(7) <= '0';
 				regs(1) <= res;
 			WHEN "0110" =>
 				-- CPL 
 				res := not op1(7);
+				flag_reg(6) <= '0';
+				flag_reg(7) <= '0';
 				regs(1) <= res;
 			WHEN "0111" =>
 				-- NOT 
 				res := not op1;
+				flag_reg(6) <= '0';
+				flag_reg(7) <= '0';
+				regs(1) <= res;
 			WHEN "1000" =>
+				--rotation R
+				res := op1(0) & op1(8 downto 1);
+				regs(1) <= res;
+				flag_reg(6) <= '0';
+				flag_reg(7) <= '0';
 			WHEN "1001" =>
+				--rotation L
+				res := op1(7 downto 0) & op1(8);
+				regs(1) <= res;
+				flag_reg(6) <= '0';
+				flag_reg(7) <= '0';
 			WHEN "1010" =>
+				--SHIFT RIGHT UNSIGNED
+				res := '0' & op1(8 downto 1);
+				regs(1) <= res;
+				flag_reg(6) <= '0';
+				flag_reg(7) <= '0';
 			WHEN "1011" =>
-			
+				--SHIFT RIGHT SIGNED
+				res := op1(8) & op1(8 downto 1);
+				regs(1) <= res;
+				flag_reg(6) <= '0';
+				flag_reg(7) <= '0';
 			WHEN "1100" =>
+				--SHIFT LEFT
+				res :=  op1(8 downto 1) & '0';
+				regs(1) <= res;
+				flag_reg(6) <= '0';
+				flag_reg(7) <= '0';
 			WHEN "1101" =>
 			WHEN "1110" =>
 			WHEN "1111" =>
-			WHEN OTHERS => null;
-			
-			IF res = 0 THEN -- zero ou pas zero
-				flag_reg(1) <= 1;
-				flag_reg(2) <= 0;
-			ELSE
-				flag_reg(1) <= 0;
-				flag_reg(2) <= 1;
-			END IF;
-			
-			IF res(8) = 1 THEN -- positif et neg
-				flag_reg(3) <= 0;
-				flag_reg(4) <= 1;
-			ELSE 
-				flag_reg(3) <= 1;
-				flag_reg(4) <= 0;
-			END IF;
-			
-			IF res(0) = 0 THEN -- pair ou impair
-				flag_reg(5) <= 1;
-			ELSE
-				flag_reg(5) <= 0;
-			END IF;
-			
+			WHEN OTHERS => null;			
 		END CASE;
 		
+		IF res = 0 THEN -- zero ou pas zero
+		flag_reg(1) <= 1;
+		flag_reg(2) <= 0;
+		ELSE
+			flag_reg(1) <= 0;
+			flag_reg(2) <= 1;
+		END IF;
+		
+		IF res(8) = 1 THEN -- positif et neg
+			flag_reg(3) <= 0;
+			flag_reg(4) <= 1;
+		ELSE 
+			flag_reg(3) <= 1;
+			flag_reg(4) <= 0;
+		END IF;
+		
+		IF res(0) = 0 THEN -- pair ou impair
+			flag_reg(5) <= 1;
+		ELSE
+			flag_reg(5) <= 0;
+		END IF;
 	end process;
 	
 end Behavioral;
