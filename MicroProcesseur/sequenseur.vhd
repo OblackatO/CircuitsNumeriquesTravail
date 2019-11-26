@@ -211,9 +211,9 @@ begin
 	variable op1, op2, res: STD_LOGIC_VECTOR(8 downto 0);
 	begin
 		op1(7 downto 1) := regs(1);
-		op1(8) := '0';
+		op1(8) := regs(1)(7);
 		op2(7 downto 1) := regs(2);
-		op2(8) := '0';
+		op2(8) := regs(2)(7);
 		CASE seq_register(1)(3 downto 1)
 			WHEN "0000" => 
 				-- ADD
@@ -225,25 +225,26 @@ begin
 				regs(1) <= res;
 			WHEN "0010" => 
 				-- CMP
-				res := op1 = op2;
-				regs(1) <= res;
+				res := op1 - op2;
 			WHEN "0011" =>
 				-- AND
 				res := op1 and op2;
 				regs(1) <= res;
-			
 			WHEN "0100" =>
 				-- OR
 				res := op1 or op2;
 				regs(1) <= res;
-
 			WHEN "0101" =>
 				-- XOR
 				res := op1 xor op2;
 				regs(1) <= res;
 			WHEN "0110" =>
+				-- CPL 
+				res := not op1(7);
+				regs(1) <= res;
 			WHEN "0111" =>
-			
+				-- NOT 
+				res := not op1;
 			WHEN "1000" =>
 			WHEN "1001" =>
 			WHEN "1010" =>
@@ -253,6 +254,8 @@ begin
 			WHEN "1101" =>
 			WHEN "1110" =>
 			WHEN "1111" =>
+			WHEN OTHERS => null;
+
 			
 		END CASE;
 		
@@ -260,3 +263,4 @@ begin
 	
 end Behavioral;
 
+-- flag_reg
