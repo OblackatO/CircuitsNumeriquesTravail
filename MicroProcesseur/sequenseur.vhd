@@ -215,9 +215,12 @@ begin
 		op2(7 downto 1) := regs(2);
 		op2(8) := '0';
 		CASE seq_register(1)(3 downto 1)
-			WHEN "0000" =>
-			WHEN "0001" =>
-			WHEN "0010" =>
+			WHEN "0000" => -- ADD
+				res := op1 + op2;
+			WHEN "0001" => -- SUB
+				res := op1 - op2;
+			WHEN "0010" => -- CMP
+				res := op1 = op2;
 			WHEN "0011" =>
 			
 			WHEN "0100" =>
