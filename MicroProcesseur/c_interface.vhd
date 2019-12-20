@@ -31,10 +31,10 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity c_interface is
+entity INTERFACE is
     PORT(clk, rst: IN STD_LOGIC;
-			--data_entry: IN STD_LOGIC_VECTOR(31 downto 0);
-			--input_data: OUT STD_LOGIC_VECTOR(15 downto 0);
+			data_entry: IN STD_LOGIC_VECTOR(31 downto 0);
+			input_data: OUT STD_LOGIC_VECTOR(15 downto 0);
 
 			physical_buttons: IN STD_LOGIC_VECTOR(4 downto 0);
 			physical_switchs: IN STD_LOGIC_VECTOR(7 downto 0);
@@ -43,11 +43,9 @@ entity c_interface is
 			
 			
         );
-end c_interface;
+end INTERFACE;
 
-architecture Behavioral of c_interface is
-			SIGNAL data_entry: STD_LOGIC_VECTOR(31 downto 0);
-			SIGNAL input_data: STD_LOGIC_VECTOR(15 downto 0);
+architecture Behavioral of INTERFACE is
 
 	SIGNAL clk_counter:  STD_LOGIC_VECTOR(15 downto 0);
 	SIGNAL button_maj, maj_delay:  STD_LOGIC;
@@ -58,11 +56,6 @@ architecture Behavioral of c_interface is
 	SIGNAL segment_activation: STD_LOGIC_VECTOR(3 downto 0);
 	
 begin
-	data_entry(31 downto 16) <= input_data;
-	data_entry(15 downto 8) <= input_data(7 downto 0);
-	data_entry(7 downto 0) <= input_data(15 downto 8);
-	
-	
 	
 	clock_counter : PROCESS(clk, rst) BEGIN
 		IF rst = '0' THEN
@@ -87,6 +80,7 @@ begin
 		END IF;		
 	END PROCESS;
 	
+	 -- DIP switch state & buttons state
 	input_data(15 downto 8) <= switch_state;
 	
 	buttons_select : PROCESS(button_maj, button_state) BEGIN
@@ -103,6 +97,8 @@ begin
 		variable data_to_display:  STD_LOGIC_VECTOR(15 downto 0);
 	BEGIN
 		--data selection
+		-- accepts data_entry of type:
+		-- MSB & LSB & current RAM value & dip switch value
 		CASE button_maj IS
 			WHEN '0' =>
 				data_to_display := data_entry(31 downto 16);
