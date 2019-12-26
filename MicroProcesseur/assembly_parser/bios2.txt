@@ -14,7 +14,7 @@ ALU CMP
 JMPdir Zero   flag1
 LDc   r(1)  "10000000"
 ALU CMP 
-JMPdir Not Zero flag3
+JMPdir NotZero flag3
 MOV r(6) r(0)
 LDc r(1) 1
 ALU ADD
@@ -24,7 +24,7 @@ flag3
 MOV r(5) r(0)
 LDc   r(1)  "01000000"
 ALU CMP
-JMPdir Not Zero flag4
+JMPdir NotZero flag4
 MOV r(6) r(0)
 LDc r(1) 1
 ALU SUB
@@ -34,17 +34,17 @@ flag4
 MOV r(5) r(0)
 LDc   r(1)  "00100000"
 ALU CMP 
-JMPdir Not Zero flag5
+JMPdir NotZero flag5
 MOV r(7) r(0)
 LDc r(1) 1
 ALU ADD
 MOV r(0) r(7)
 JMPdir Absolue flag2
-flag 5
+flag5
 MOV r(5) r(0)
 LDc   r(1)  "0001 0000"
 ALU CMP 
-JMPdir Not Zero flag6
+JMPdir NotZero flag6
 MOV r(7) r(0)
 LDc r(1) 1
 ALU SUB
@@ -54,7 +54,7 @@ flag6
 MOV r(5) r(0)
 LDc   r(1)  "0000 1000"
 ALU CMP 
-JMPdir Not Zero flag7
+JMPdir NotZero flag7
 LDdir r(4) addr(254)
 STind r(4)
 JMPdir Absolue flag2
@@ -62,7 +62,7 @@ flag7
 MOV r(5) r(0)
 LDc   r(1)  "0000 0100"
 ALU CMP 
-JMPdir Not Zero flag8
+JMPdir NotZero flag8
 JMPdir Absolue addr(256)
 flag8
 flag2
