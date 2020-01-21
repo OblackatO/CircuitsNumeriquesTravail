@@ -218,8 +218,8 @@ begin
 		IF seq_register(1)(7 downto 4) = "0100" THEN
 			op1(7 downto 0) := regs(0);
 			op1(8) := regs(0)(7);
-			op2(7 downto 0) := regs(0);
-			op2(8) := regs(0)(7);
+			op2(7 downto 0) := regs(1);
+			op2(8) := regs(1)(7);
 			CASE seq_register(1)(3 downto 0) IS
 				WHEN "0000" => 
 					-- ADD
