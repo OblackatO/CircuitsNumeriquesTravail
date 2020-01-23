@@ -38,8 +38,8 @@ entity INTERFACE is
 
 			physical_buttons: IN STD_LOGIC_VECTOR(4 downto 0);
 			physical_switchs: IN STD_LOGIC_VECTOR(7 downto 0);
-			physical_segment: OUT STD_LOGIC_VECTOR(0 to 7);
-			physical_segment_activation: OUT STD_LOGIC_VECTOR(3 downto 0)
+			physical_segment: OUT STD_LOGIC_VECTOR(0 to 7)
+			--physical_segment_activation: OUT STD_LOGIC_VECTOR(3 downto 0)
 			
 			
         );
@@ -125,7 +125,7 @@ begin
 		END CASE;	
 	END PROCESS;
 	
-	physical_segment_activation <= segment_activation;
+	--physical_segment_activation <= segment_activation;
 	
 	segment_encoder : PROCESS(button_maj, segment_digit, segment_activation) BEGIN
 		--display maj point

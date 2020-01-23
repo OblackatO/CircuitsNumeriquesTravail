@@ -258,14 +258,14 @@ begin
 					flag_reg(7) <= '0';
 					alu_result <= res(7 downto 0);
 				WHEN "0110" =>
-					-- CPL 
+					-- CPL- complémentaire
 					res := op1;
 					res(7) := not op1(7);
 					flag_reg(6) <= '0';
 					flag_reg(7) <= '0';
 					alu_result <= res(7 downto 0);
 				WHEN "0111" =>
-					-- NOT 
+					-- NOT - 0101 > 1010
 					res := not op1;
 					flag_reg(6) <= '0';
 					flag_reg(7) <= '0';
@@ -314,7 +314,7 @@ begin
 				flag_reg(2) <= '1';
 			END IF;
 			
-			IF res(8) = '1' THEN -- positif et neg
+			IF res(8) = '0' THEN -- positif et neg
 				flag_reg(3) <= '0';
 				flag_reg(4) <= '1';
 			ELSE 
