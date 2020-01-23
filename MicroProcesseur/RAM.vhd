@@ -67,10 +67,12 @@ begin
 	 -- to DIP switch state & buttons state
 
     write_memory : PROCESS(clk) BEGIN
-            IF clk'event and clk = '1' then  
-                IF write_read = '1' AND activation = '1' then 
-                    ramMemory(to_integer(Unsigned(address))) <= data_entry;
-                end if;
+            IF clk'event and clk = '1' then
+					IF address(15 downto 8) /= "00000000" THEN				
+						IF write_read = '1' AND activation = '1' then 
+							ramMemory(to_integer(Unsigned(address))) <= data_entry;
+						end if;
+					END IF;
             end if;
     end PROCESS;
 	 
@@ -100,7 +102,7 @@ begin
 
 	read_memory : PROCESS(write_read, address) BEGIN
 		IF write_read = '0' AND activation = '1' then
-			IF NOT address(15 downto 8) = "00000000" THEN
+			IF address(15 downto 8) /= "00000000" THEN
 				data_exit <= ramMemory(to_integer(Unsigned(address)));
 			ELSE 
 				data_exit <= read_only_memory(to_integer(Unsigned(address(7 downto 0))));
@@ -124,7 +126,7 @@ begin
 "00000000",
 
 "11000010",
-"000000001",
+"00000001",
 "00000000",
 
 "11000011",

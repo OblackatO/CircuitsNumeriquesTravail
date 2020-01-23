@@ -146,6 +146,7 @@ begin
 						address <= seq_register(2) & data_entry;
 						ram_activation <= '1';
 						write_read <= '1';
+						data_out <= regs(to_integer(Unsigned(seq_register(1)(2 downto 0))));
 					-- JMP mode addressage directe
 					ELSIF seq_register(1)(4 downto 3) = "10" THEN
 						ram_activation <= '0';
@@ -187,7 +188,7 @@ begin
 							IF seq_register(1)(6) = '1' AND seq_register(1)(5) = '1' THEN
 									-- not implemented
 							ELSE 
-								data_out <= regs(to_integer(Unsigned(seq_register(1)(2 downto 0))));
+								--data_out <= regs(to_integer(Unsigned(seq_register(1)(2 downto 0))));
 							END IF;
 						
 						ELSIF seq_register(1)(4) ='1' AND seq_register(1)(3)='0' THEN
