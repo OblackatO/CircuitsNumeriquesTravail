@@ -242,6 +242,6 @@ class AssemblyParser:
                 converted_array.append(element[24:32])
         print("[")
         for element in converted_array:
-            print("\"{}\"".format(element))
+            print("\"{},\"".format(element))
         print("]")
         print("[>]Copy&Paste the string above in VHDL.")
