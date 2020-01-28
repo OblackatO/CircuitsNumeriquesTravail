@@ -307,10 +307,10 @@ begin
 				WHEN "1111" =>
 				WHEN OTHERS => null;			
 			END CASE;
-			
+				flag_reg(0) <= '1';
 			IF res = 0 THEN -- zero ou pas zero
-			flag_reg(1) <= '1';
-			flag_reg(2) <= '0';
+				flag_reg(1) <= '1';
+				flag_reg(2) <= '0';
 			ELSE
 				flag_reg(1) <= '0';
 				flag_reg(2) <= '1';
