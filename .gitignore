@@ -293,3 +293,5 @@ MicroProcesseur/RAM.stx
 MicroProcesseur/RAM.xst
 
 MicroProcesseur/sequenseur_simulation_test.wcfg
+
+MicroProcesseur/assembly_parser/__pycache__/

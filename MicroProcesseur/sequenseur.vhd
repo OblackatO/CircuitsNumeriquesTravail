@@ -81,6 +81,7 @@ begin
 								address <= registres_generaux(6) & registres_generaux(7);
 								write_read <= '1';
 								ram_activation <= '1';
+								data_out <= registres_generaux(to_integer(Unsigned(instructions_register(1)(2 downto 0))));
 							END IF;
 						END IF;
 					ELSE state <= "010";
@@ -112,6 +113,7 @@ begin
 								address <= data_entry & registres_generaux(7);
 								ram_activation <= '1';
 								write_read <= '1';
+								data_out <= registres_generaux(to_integer(Unsigned(instructions_register(1)(2 downto 0))));
 							--JMP
 							ELSIF instructions_register(1)(4 downto 3) = "10" THEN
 								ram_activation <= '0';
@@ -194,7 +196,7 @@ begin
 						ELSIF instructions_register(1)(4) ='1' AND instructions_register(1)(3)='0' THEN
 							-- JMP
 							IF flag_reg(to_integer(Unsigned(instructions_register(1)(2 downto 0)))) = '1' THEN
-								IF instructions_register(1)(6 downto 5) = "01" THEN 		--mixte
+								IF instructions_register(1)(6 downto 5) = "01" THEN 		--mixte 01
 									address_register(1) <= instructions_register(2);
 								ELSIF instructions_register(1)(6 downto 5) = "10" THEN 	-- direct 10
 									address_register(1) <= instructions_register(2);
